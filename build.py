@@ -260,8 +260,10 @@ def main():
 
     shader, mvploc = setup_shader()
 
-    num_view = 20
+    num_view = 40
     random_rotation = [random_uniform_rotation() for _ in range(num_view)]
+
+    os.makedirs('./size50/', exist_ok=True)
 
     f = open("Thingi10K/goodfile_id.csv", 'r', encoding='utf-8')
     rdr = csv.reader(f)
@@ -272,11 +274,11 @@ def main():
         print(idx)
         if not os.path.isfile(filename):
             continue
-        
+
         # read mesh
         m = mesh.Mesh.from_file(filename)
 
-        for scale in [0.3, 0.6, 0.9]:
+        for scale in [0.3, 0.4, 0.5, 0.6, 0.7]:
             for i in range(num_view):
                 vao, vbo = setup_glBuffer(m, random_rotation[i])
                 mvp = get_mvp(scale)
